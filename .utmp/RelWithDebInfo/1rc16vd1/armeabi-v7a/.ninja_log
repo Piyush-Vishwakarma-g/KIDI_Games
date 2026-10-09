@@ -1,0 +1,19 @@
+# ninja log v5
+67	2916	8113556360803751	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	3d622161227c192b
+81	3112	8113556363580364	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	761e114e84783035
+53	2710	8113556358716161	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	737c8c471b12e98d
+112	2759	8113556358716161	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	a767db48d30e188b
+93	2839	8113556360707918	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	2bf60b5322628f47
+34	3004	8113556361953829	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	9f759df0223ad71f
+129	3271	8113556365226046	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	6822e3524c98eb01
+3485	3896	8113556371384584	C:/Users/mainp/UnityP/KIDI_PROJ/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/1rc16vd1/obj/armeabi-v7a/libgame.so	c033722e47b6c6f9
+10	3484	8113556367302257	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	e3d62fd3713e83e8
+122	3124	8118629677678229	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	a767db48d30e188b
+34	3128	8118629677678229	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	737c8c471b12e98d
+46	3136	8118629677793386	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	3d622161227c192b
+75	3162	8118629678228028	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	2bf60b5322628f47
+60	3181	8118629678560760	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	9f759df0223ad71f
+92	3313	8118629679908555	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	761e114e84783035
+108	3492	8118629681702223	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	6822e3524c98eb01
+20	3600	8118629682794438	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	e3d62fd3713e83e8
+3601	3901	8118629685878296	C:/Users/mainp/UnityP/KIDI_PROJ/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/1rc16vd1/obj/armeabi-v7a/libgame.so	c033722e47b6c6f9
