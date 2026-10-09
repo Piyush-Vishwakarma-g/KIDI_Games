@@ -6,7 +6,9 @@
 [Ll]ogs
 [Uu]ser[Ss]ettings
 [Mm]emoryCaptures
-IOS/
+
+# Root level IOS folder ko ignore karne ke liye aage slash (/) lagayein:
+/IOS/
 *.zip
 *.a
 *.so
