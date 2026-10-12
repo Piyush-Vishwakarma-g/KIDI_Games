@@ -166,6 +166,12 @@ public class RuntimePathDrawer : MonoBehaviour
         CheckTargetCollision(currentWorldPos);
 
         AddWaypoint(currentWorldPos);
+
+        // Path draw karte waqt character ka child 0 active hoke sath sath move kare
+        if (playerFollower != null)
+        {
+            playerFollower.StartRealtimeFollowing();
+        }
     }
 
     private void ContinueDrawing()
@@ -202,6 +208,7 @@ public class RuntimePathDrawer : MonoBehaviour
         Collider2D hitCollider = Physics2D.OverlapCircle(position, 0.2f);
         if (hitCollider != null && hitCollider.CompareTag(targetTag))
         {
+            AddWaypoint(position);
             isDragging = false;
             isTargetReached = true;
 
@@ -285,10 +292,10 @@ public class RuntimePathDrawer : MonoBehaviour
             }
 
 
-            // Start movement
-            if (playerFollower != null && pathManager != null && pathManager.waypoints.Count > 0)
+            // Target reach ho gaya: character final target tak pahunch kar complete karega
+            if (playerFollower != null)
             {
-                playerFollower.CallLoadScene();
+                playerFollower.OnTargetReached();
             }
 
             return true;
@@ -302,6 +309,12 @@ public class RuntimePathDrawer : MonoBehaviour
         if (isFailed || isTargetReached) return;
 
         isDragging = false;
+
+        Vector3 endPos = GetWorldTouchPosition();
+        if (CheckTargetCollision(endPos))
+        {
+            return;
+        }
 
         if (playerFollower != null && pathManager != null && pathManager.waypoints.Count > 1)
         {
@@ -319,6 +332,11 @@ public class RuntimePathDrawer : MonoBehaviour
     {
         isDragging = false;
         isFailed = true;
+
+        if (playerFollower != null)
+        {
+            playerFollower.ResetPath();
+        }
 
         ClearExistingWaypoints();
 

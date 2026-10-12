@@ -551,7 +551,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15854, y: 0.15854, z: 0.15854}
+  m_LocalScale: {x: 0.31660438, y: 0.31660438, z: 0.31660438}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2144478902}
@@ -564,7 +564,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105373368}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 700874294832ced489536d30dacf0f1c, type: 2}
   m_CullingMode: 0
@@ -627,7 +627,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 523279868, guid: f8b69d94d0d28cb4bbf8f7b2409713e2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64c9e3439b4635f4eaa54d1263a77215, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5187,7 +5187,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144478899}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d49ca4be0a1c59428545ed900abcb1b, type: 3}
   m_Name: 
@@ -5195,7 +5195,11 @@ MonoBehaviour:
   pathManager: {fileID: 1164714125}
   moveSpeed: 2
   rotationSpeed: 10
+  smallScale: {x: 0.5, y: 0.5, z: 0.5}
+  scaleSpeed: 8
   restartDelay: 1
+  currentWaypointIndex: 0
+  isMoving: 0
 --- !u!212 &2144478901
 SpriteRenderer:
   serializedVersion: 2

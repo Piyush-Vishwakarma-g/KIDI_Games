@@ -5,19 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CubeGame.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BagGame.unity
     guid: 59928938b41d80d4ba2bbeb7c9f71fd9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TrainGame.unity
     guid: a60857d135dfa474084a7901246e8cfd
   - enabled: 1
     path: Assets/Scenes/AvatarGame.unity
     guid: dd3f92933f2ccb041b27801c37c45d06
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MazeTraverse.unity
     guid: 67b2c670baf466749a1ea3c113a86522
   m_configObjects:
