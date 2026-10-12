@@ -1,0 +1,460 @@
+fileFormatVersion: 2
+guid: f8b69d94d0d28cb4bbf8f7b2409713e2
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: rungirl-ezgif.com-gif-to-sprite-converter_6
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 1266
+        width: 353
+        height: 445
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f95f2074f476d6f49a641abddb85fe37
+      internalID: 523279868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rungirl-ezgif.com-gif-to-sprite-converter_7
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 1264
+        width: 305
+        height: 441
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b0576f386c08884aa41a9aa8e52f1e1
+      internalID: -1209848072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rungirl-ezgif.com-gif-to-sprite-converter_9
+      rect:
+        serializedVersion: 2
+        x: 1863
+        y: 1264
+        width: 193
+        height: 447
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e765536e9ac18f4e90e26ec3b7c80af
+      internalID: -111373345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rungirl-ezgif.com-gif-to-sprite-converter_11
+      rect:
+        serializedVersion: 2
+        x: 2636
+        y: 1266
+        width: 242
+        height: 445
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29e0075d10b97864eb0f1379dfe8a0ec
+      internalID: -568228000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rungirl-ezgif.com-gif-to-sprite-converter_12
+      rect:
+        serializedVersion: 2
+        x: 3421
+        y: 1266
+        width: 305
+        height: 451
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d3935a1923e5784584a588ed165040e
+      internalID: -1836228699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rungirl-ezgif.com-gif-to-sprite-converter_24
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 725
+        width: 398
+        height: 420
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 927f2a2183ebc954db3c95dd94b1a711
+      internalID: -366867923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rungirl-ezgif.com-gif-to-sprite-converter_27
+      rect:
+        serializedVersion: 2
+        x: 2671
+        y: 663
+        width: 185
+        height: 451
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d7080e6d9926764f87560631f3c7db5
+      internalID: 238577567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rungirl-ezgif.com-gif-to-sprite-converter_28
+      rect:
+        serializedVersion: 2
+        x: 3437
+        y: 655
+        width: 242
+        height: 459
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1663d39ea5b718b4497a004fb64675e9
+      internalID: -1624274760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rungirl-ezgif.com-gif-to-sprite-converter_29
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 655
+        width: 334
+        height: 449
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c9f1e7cff81dc44897f2243a1cee3f9
+      internalID: 206869500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rungirl-ezgif.com-gif-to-sprite-converter_30
+      rect:
+        serializedVersion: 2
+        x: 1806
+        y: 661
+        width: 304
+        height: 443
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48d011d69b964264c940256489fd4b62
+      internalID: 1095799593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rungirl-ezgif.com-gif-to-sprite-converter_42
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 63
+        width: 304
+        height: 453
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68d87582fb4b13b40a70cdd502267ef8
+      internalID: -177148583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rungirl-ezgif.com-gif-to-sprite-converter_45
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 117
+        width: 398
+        height: 429
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d76ee38303a95548aa9487122dd48b7
+      internalID: -1959491144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ef24c209c51b8c24ba1ffe39413aad8e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+      - key: SpriteEditor.SliceOnImport
+        value: False
+    nameFileIdTable:
+      rungirl-ezgif.com-gif-to-sprite-converter_0: 961875372
+      rungirl-ezgif.com-gif-to-sprite-converter_1: 1869246171
+      rungirl-ezgif.com-gif-to-sprite-converter_10: 462762504
+      rungirl-ezgif.com-gif-to-sprite-converter_11: -568228000
+      rungirl-ezgif.com-gif-to-sprite-converter_12: -1836228699
+      rungirl-ezgif.com-gif-to-sprite-converter_13: 1188478066
+      rungirl-ezgif.com-gif-to-sprite-converter_14: 844629700
+      rungirl-ezgif.com-gif-to-sprite-converter_15: -726320657
+      rungirl-ezgif.com-gif-to-sprite-converter_16: -990178265
+      rungirl-ezgif.com-gif-to-sprite-converter_17: -1508310487
+      rungirl-ezgif.com-gif-to-sprite-converter_18: -1416946908
+      rungirl-ezgif.com-gif-to-sprite-converter_19: -96560673
+      rungirl-ezgif.com-gif-to-sprite-converter_2: 418269754
+      rungirl-ezgif.com-gif-to-sprite-converter_20: -2003264479
+      rungirl-ezgif.com-gif-to-sprite-converter_21: -158390465
+      rungirl-ezgif.com-gif-to-sprite-converter_22: -2133907149
+      rungirl-ezgif.com-gif-to-sprite-converter_23: -125786687
+      rungirl-ezgif.com-gif-to-sprite-converter_24: -366867923
+      rungirl-ezgif.com-gif-to-sprite-converter_25: -1708283736
+      rungirl-ezgif.com-gif-to-sprite-converter_26: 1447262144
+      rungirl-ezgif.com-gif-to-sprite-converter_27: 238577567
+      rungirl-ezgif.com-gif-to-sprite-converter_28: -1624274760
+      rungirl-ezgif.com-gif-to-sprite-converter_29: 206869500
+      rungirl-ezgif.com-gif-to-sprite-converter_3: 60780182
+      rungirl-ezgif.com-gif-to-sprite-converter_30: 1095799593
+      rungirl-ezgif.com-gif-to-sprite-converter_31: 1901045953
+      rungirl-ezgif.com-gif-to-sprite-converter_32: 1101670412
+      rungirl-ezgif.com-gif-to-sprite-converter_33: -702337570
+      rungirl-ezgif.com-gif-to-sprite-converter_34: 28594839
+      rungirl-ezgif.com-gif-to-sprite-converter_35: 1064597139
+      rungirl-ezgif.com-gif-to-sprite-converter_36: 71639211
+      rungirl-ezgif.com-gif-to-sprite-converter_37: 2063444383
+      rungirl-ezgif.com-gif-to-sprite-converter_38: 1357178095
+      rungirl-ezgif.com-gif-to-sprite-converter_39: 1320909871
+      rungirl-ezgif.com-gif-to-sprite-converter_4: -495560626
+      rungirl-ezgif.com-gif-to-sprite-converter_40: 970488749
+      rungirl-ezgif.com-gif-to-sprite-converter_41: -375804495
+      rungirl-ezgif.com-gif-to-sprite-converter_42: -177148583
+      rungirl-ezgif.com-gif-to-sprite-converter_43: 902995196
+      rungirl-ezgif.com-gif-to-sprite-converter_44: 899094894
+      rungirl-ezgif.com-gif-to-sprite-converter_45: -1959491144
+      rungirl-ezgif.com-gif-to-sprite-converter_46: 114503662
+      rungirl-ezgif.com-gif-to-sprite-converter_47: -352667984
+      rungirl-ezgif.com-gif-to-sprite-converter_48: 783246774
+      rungirl-ezgif.com-gif-to-sprite-converter_5: 658436146
+      rungirl-ezgif.com-gif-to-sprite-converter_6: 523279868
+      rungirl-ezgif.com-gif-to-sprite-converter_7: -1209848072
+      rungirl-ezgif.com-gif-to-sprite-converter_8: 823883155
+      rungirl-ezgif.com-gif-to-sprite-converter_9: -111373345
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
