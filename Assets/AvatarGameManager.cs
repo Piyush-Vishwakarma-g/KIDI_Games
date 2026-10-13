@@ -18,6 +18,10 @@ public class AvatarGameManager : MonoBehaviour
     public GameObject chooseAvatarObj;
     public GameObject customAvatarObj;
 
+public Button maleBtn;
+public Button femaleBtn;
+    
+
     public GameObject targetEmotionObj;
     public GameObject targetShirtObject;
 
