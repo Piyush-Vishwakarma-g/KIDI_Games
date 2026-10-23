@@ -23,7 +23,7 @@ public class PacmanMazeCharacterMover : MonoBehaviour
     [SerializeField] private string targetTag = "mazeTarget";
     [SerializeField] private GameObject greatJobPopup;
     [SerializeField] private GameObject tryJobPopup;
-     [SerializeField] private GameObject levelUpPopup;
+    [SerializeField] private GameObject levelUpPopup;
     [SerializeField] private TMP_Text popupMessage;
     [SerializeField] private string successMessage = "Bravo! Great Job!";
     [SerializeField] private float restartDelay = 2f;
@@ -87,7 +87,7 @@ public class PacmanMazeCharacterMover : MonoBehaviour
     void Start()
     {
         DisableAnimator();
-
+Debug.Log("DisableAnimator called in Start");
         if (MazeTraverseManager.instance != null && targetObjectsArry != null)
         {
             int currentLevel = MazeTraverseManager.instance.mazeLevelIndex;
@@ -302,12 +302,26 @@ public class PacmanMazeCharacterMover : MonoBehaviour
                 }
                 else
                 {
-                    if(tryJobPopup != null)
+                    if (tryJobPopup != null)
                     {
                         tryJobPopup.SetActive(true);
                     }
                     Debug.Log("No matching condition for the collided object.");
                     SimpleAudioPlayerTraversePath.instance.PlaySound2();
+                    hasReachedTarget = false;
+                    isMovingToTarget = false;
+                    moveDirection = Vector2.zero;
+                    rb.linearVelocity = Vector2.zero;
+                    // Reset character color
+                    if (spriteRenderer != null)
+                    {
+                        spriteRenderer.color = Color.white;
+                    }
+
+                    if (greatJobPopup != null)
+                    {
+                        greatJobPopup.SetActive(false);
+                    }
                 }
             }
 
@@ -375,7 +389,7 @@ public class PacmanMazeCharacterMover : MonoBehaviour
 
             UpdateSlider(currentLevel);
         }
-        if(MazeTraverseManager.instance.mazeLevelIndex >= 4)
+        if (MazeTraverseManager.instance.mazeLevelIndex >= 4)
         {
             if (levelUpPopup != null)
             {
