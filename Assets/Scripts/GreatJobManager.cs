@@ -33,6 +33,21 @@ public class GreatJobManager : MonoBehaviour
             if (GameManager.instance.levelUp != null)
                 GameManager.instance.levelUp.SetActive(true);
         }
+
+        if(LevelData.instance.targetIndex==2)
+        {
+            GameManager.instance.PlaygreatAudio();
+        } 
+        else if(LevelData.instance.targetIndex==3) 
+           {
+             GameManager.instance.PlayGoodJobAudio();
+        } 
+        else if(LevelData.instance.targetIndex==4)
+        {
+            GameManager.instance.PlayExcellentAudio();
+        } 
+       
+        
     }
 
     private void OnDisable()

@@ -42,7 +42,10 @@ public class TrainSimpleUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler,
             {
                 UnityEngine.Debug.Log("EndDrag: Successfully dropped on target slot!" + hit.collider.name );
                     
-                if (hit.collider.CompareTag(TrainGameManager.instance.targetTag) &&transform.name==TrainGameManager.instance.targetTag)
+                string targetTag = TrainGameManager.instance.targetTag?.Trim();
+                if (!string.IsNullOrEmpty(targetTag) &&
+                    hit.collider.CompareTag(targetTag) &&
+                    transform.name == targetTag)
                 {
                     UnityEngine.Debug.Log("EndDrag: Successfully dropped on target slot!" + transform.name + "--target name----" + TrainGameManager.instance.targetTag);
                     droppedOnCorrectSlot = true;

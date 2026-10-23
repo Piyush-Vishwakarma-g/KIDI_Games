@@ -17,6 +17,15 @@ public class AvatarGameManager : MonoBehaviour
 
     public GameObject chooseAvatarObj;
     public GameObject customAvatarObj;
+     [SerializeField] public AudioSource audioSource;
+    [SerializeField] public AudioClip BravoSound;
+    [SerializeField] public AudioClip greatSound;
+    [SerializeField] public AudioClip goodJobSound;
+    [SerializeField] public AudioClip exelentSound;
+
+    public bool isGoodjobAudioPlayed = false;
+    public bool isExcellentAudioPlayed = false;
+    public bool isGreatAudioPlayed = false;
 
 public Button maleBtn;
 public Button femaleBtn;
@@ -67,6 +76,8 @@ public Button femaleBtn;
 
     public Sprite[] emotionSpriteAry;
     public Sprite[] emotionBoySpriteAry;
+
+
 
 
 
@@ -163,6 +174,38 @@ public Button femaleBtn;
         }
         hairColor[hairColorIndex].transform.GetChild(0).gameObject.SetActive(true);
     }
+    public void PlaySuccessAudio()
+    {
+        if (audioSource != null && BravoSound != null)
+        {
+            audioSource.PlayOneShot(BravoSound);
+        }
+
+    }
+    public void PlayGoodJobAudio()
+    {
+        if (audioSource != null && goodJobSound != null)
+        {
+            audioSource.PlayOneShot(goodJobSound);
+        }
+
+    }
+    public void PlayExcellentAudio()
+    {
+        if (audioSource != null && exelentSound != null)
+        {
+            audioSource.PlayOneShot(exelentSound);
+        }
+
+    }
+    public void PlaygreatAudio()
+    {
+        if (audioSource != null && greatSound != null)
+        {
+            audioSource.PlayOneShot(greatSound);
+        }
+
+    }
 
     // =========================
     // CONTINUE BUTTON
@@ -178,8 +221,13 @@ public Button femaleBtn;
         );
         DisableALLBtn();
         ShowCustomAvatar();
-        // Next scene
-        // SceneManager.LoadScene("TrainGame");
+        isGoodjobAudioPlayed = false;
+        isExcellentAudioPlayed = false;
+        isGreatAudioPlayed = false;
+
+
+        
+        
     }
     public void ShowCustomAvatar()
     {
@@ -310,6 +358,13 @@ public Button femaleBtn;
     }
     public void OnEyeClick(int val)
     {
+        if (!isGoodjobAudioPlayed)
+        {
+            isGoodjobAudioPlayed = true;
+            PlayGoodJobAudio();
+        }
+        
+        
         for (int i = 0; i < eyeBtn.Length; i++)
         {
             eyeBtn[i].transform.GetChild(0).gameObject.SetActive(false);
@@ -331,6 +386,12 @@ public Button femaleBtn;
     }
     public void OnShirtClick(int val)
     {
+         if (!isExcellentAudioPlayed)
+        {
+            isExcellentAudioPlayed = true;
+            PlayExcellentAudio();
+        }
+        
         for (int i = 0; i < shirtBtn.Length; i++)
         {
             shirtBtn[i].transform.GetChild(0).gameObject.SetActive(false);
@@ -376,6 +437,12 @@ public Button femaleBtn;
 
         if (showResult)
         {
+            if (!isGreatAudioPlayed)
+            {
+                isGreatAudioPlayed = true;
+                PlaygreatAudio();
+            }
+            
             greatJobObj.SetActive(true);
             tryJobObj.SetActive(false);
 

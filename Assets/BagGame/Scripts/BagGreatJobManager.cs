@@ -34,6 +34,23 @@ public class BagGreatJobManager : MonoBehaviour
             if (BagGameManager.instance.levelUp != null)
                 BagGameManager.instance.levelUp.SetActive(true);
         }
+
+          if(BagLevelData.instance.targetIndex==3)
+        {
+            BagGameManager.instance.PlaygreatAudio();
+        } 
+        else if(BagLevelData.instance.targetIndex==4) 
+           {
+             BagGameManager.instance.PlayGoodJobAudio();
+        } 
+        else if(BagLevelData.instance.targetIndex==5)
+        {
+            BagGameManager.instance.PlayExcellentAudio();
+        } 
+        else if(BagLevelData.instance.targetIndex==6)
+        {
+            BagGameManager.instance.PlaySuccessAudio();
+        } 
     }
 
     private void OnDisable()

@@ -61,9 +61,27 @@ public sealed class TrainGreatJobManager : MonoBehaviour
         gameManager.SetLevelObject();
 
         // ---------------- SMOOTH MOVEMENT LOGIC ----------------
-        Transform targetTrain = (levelData.levelIndex == 1) 
-            ? gameManager.TrainEngine.transform 
-            : gameManager.MultiTrainEngine.transform;
+        Transform targetTrain;
+        switch (levelData.levelIndex)
+        {
+            case 1:
+                targetTrain = gameManager.TrainEngine.transform;
+                break;
+            case 2:
+                targetTrain = gameManager.MultiTrainEngine.transform;
+                break;
+            case 3:
+                targetTrain = gameManager.MultiTrainEngine3.transform;
+                break;
+            case 4:
+                targetTrain = gameManager.MultiTrainEngine4.transform;
+                break;
+            case 5:
+                targetTrain = gameManager.MultiTrainEngine5.transform;
+                break;
+            default:
+                yield break;
+        }
 
         RectTransform rectTransform = targetTrain.GetComponent<RectTransform>();
         Vector3 startPosition = rectTransform.localPosition;
@@ -73,11 +91,13 @@ public sealed class TrainGreatJobManager : MonoBehaviour
         {
             Debug.Log("I am here iii11  "+levelData.targetIndex);
             targetPosition = gameManager._targetPosition1;
+            gameManager.audioSource.PlayOneShot(gameManager.greatSound);
         }
         else if (levelData.targetIndex == 3)
         {
             Debug.Log("I am here iii33  "+levelData.targetIndex);
             targetPosition = gameManager._targetPosition2;
+            gameManager.audioSource.PlayOneShot(gameManager.exelentSound);
         }
         
 

@@ -8,8 +8,10 @@ public class TrainLevelUpManager : MonoBehaviour
 [SerializeField] private float moveDuration = 1.0f; // Movement duration in seconds
     private void OnEnable()
     {
+
         TrainGameManager gameManager = TrainGameManager.instance;
         TrainLevelData levelData = TrainLevelData.instance;
+        gameManager.audioSource.PlayOneShot(gameManager.BravoSound);
 
          Transform targetTrain = (levelData.levelIndex == 1) 
             ? gameManager.TrainEngine.transform 

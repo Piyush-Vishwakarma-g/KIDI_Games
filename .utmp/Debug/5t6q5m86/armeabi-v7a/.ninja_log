@@ -1,10 +1,19 @@
 # ninja log v5
 47	5055	8133410184199900	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	725ef056611041cf
 68	5144	8133410184587715	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	1d6eea5c9b5e11bb
-17	5193	8133410185248413	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	82145f3b9732843b
-32	5331	8133410186793412	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	a957566e86d4e5a
-108	5524	8133410188932266	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	e53d5b5d114c0b7f
 134	5582	8133410189142803	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	4d8e13471ade0eec
+17	5193	8133410185248413	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	82145f3b9732843b
+108	5524	8133410188932266	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	e53d5b5d114c0b7f
+32	5331	8133410186793412	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	a957566e86d4e5a
 93	5844	8133410192265738	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	a3517c371a2705d
 1	5918	8133410193048211	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	e505236edda3405e
 5918	6186	8133410195718731	C:/Users/mainp/UnityP/KIDI_PROJ/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/5t6q5m86/obj/armeabi-v7a/libgame.so	a160eddf7a225967
+20	2245	8137458640688422	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	725ef056611041cf
+69	2322	8137458641690884	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	1d6eea5c9b5e11bb
+29	2349	8137458642070995	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	a957566e86d4e5a
+86	2402	8137458642769033	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	e53d5b5d114c0b7f
+44	2426	8137458642908289	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	82145f3b9732843b
+56	2508	8137458643808071	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	4d8e13471ade0eec
+103	2643	8137458645270758	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	a3517c371a2705d
+11	2663	8137458645368000	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	e505236edda3405e
+2664	3018	8137458649046791	C:/Users/mainp/UnityP/KIDI_PROJ/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/5t6q5m86/obj/armeabi-v7a/libgame.so	a160eddf7a225967

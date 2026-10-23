@@ -13,7 +13,7 @@ public class TryAgainJobManager : MonoBehaviour
         }
         disableCoroutine = StartCoroutine(DisTryAgainRoutine());
         int targetIdx = LevelData.instance.targetIndex;
-          if(LevelData.instance.levelIndex==0)
+          if(LevelData.instance.levelIndex==1)
           {
             GameManager.instance.levelOneUI.SetActive(false); 
           } else
@@ -38,7 +38,7 @@ public class TryAgainJobManager : MonoBehaviour
         }
         int targetIdx = LevelData.instance.targetIndex;
                         
-        if(LevelData.instance.levelIndex==0)
+        if(LevelData.instance.levelIndex==1)
           {
             GameManager.instance.levelOneUI.SetActive(true); 
           } else

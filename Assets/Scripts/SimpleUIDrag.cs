@@ -72,25 +72,45 @@ public class SimpleUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             rectTransform.anchoredPosition = startPosition;
     }
 
-    private void PrepareDropColliders()
+    
+private void PrepareDropColliders()
+{
+    GameManager gm = GameManager.instance;
+
+    if (gm == null || LevelData.instance == null)
+        return;
+
+    gm.isDraggingUI = true;
+
+    if (gm.levelCubeObj != null)
     {
-        UnityEngine.Debug.Log("Successfully PrepareDropColliders on target slot!"  );
-                
-        if (GameManager.instance == null) return;
+        int index = LevelData.instance.levelIndex - 1;
 
-        GameManager.instance.isDraggingUI = true;
-
-        if (GameManager.instance.cubeCollider != null)
-            GameManager.instance.cubeCollider.enabled = false;
-
-        if (GameManager.instance.sidePhasesCollider != null)
+        if (index >= 0 && index < gm.levelCubeObj.Length)
         {
-            foreach (var sidePhase in GameManager.instance.sidePhasesCollider)
+            GameObject levelObject = gm.levelCubeObj[index];
+
+            if (levelObject != null)
             {
-                if (sidePhase != null) sidePhase.enabled = true;
+                BoxCollider boxCollider =
+                    levelObject.GetComponent<BoxCollider>();
+
+                if (boxCollider != null)
+                    boxCollider.enabled = false;
             }
         }
     }
+
+    if (gm.sidePhasesCollider != null)
+    {
+        foreach (BoxCollider sidePhase in gm.sidePhasesCollider)
+        {
+            if (sidePhase != null)
+                sidePhase.enabled = true;
+        }
+    }
+}
+
 
     public void ShowGreatJob()
     {

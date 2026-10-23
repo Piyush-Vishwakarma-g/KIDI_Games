@@ -13,6 +13,9 @@ TagManager:
   - cross
   - MazeWall
   - mazeTarget
+  - wall
+  - obstacle
+  - target
   layers:
   - Default
   - TransparentFX

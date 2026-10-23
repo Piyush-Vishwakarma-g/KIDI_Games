@@ -7,6 +7,13 @@ public class BagGameManager : MonoBehaviour
 {
     public static BagGameManager instance;
     public Button backBtn;
+     [Header("Audio Settings")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip BravoSound;
+    [SerializeField] private AudioClip greatSound;
+    [SerializeField] private AudioClip goodJobSound;
+    [SerializeField] private AudioClip exelentSound;
+    
     public GameObject levelOneUI;
     public GameObject[] leveltwoUIObject;
     public string[] targetName;
@@ -57,6 +64,38 @@ public class BagGameManager : MonoBehaviour
         {
             dummyObjects[i].SetActive(false);
         }
+    }
+    public void PlaySuccessAudio()
+    {
+        if (audioSource != null && BravoSound != null)
+        {
+            audioSource.PlayOneShot(BravoSound);
+        }
+
+    }
+    public void PlayGoodJobAudio()
+    {
+        if (audioSource != null && goodJobSound != null)
+        {
+            audioSource.PlayOneShot(goodJobSound);
+        }
+
+    }
+    public void PlayExcellentAudio()
+    {
+        if (audioSource != null && exelentSound != null)
+        {
+            audioSource.PlayOneShot(exelentSound);
+        }
+
+    }
+    public void PlaygreatAudio()
+    {
+        if (audioSource != null && greatSound != null)
+        {
+            audioSource.PlayOneShot(greatSound);
+        }
+
     }
     public void SetLevelObject()
     {

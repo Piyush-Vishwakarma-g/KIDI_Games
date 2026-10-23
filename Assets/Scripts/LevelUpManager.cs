@@ -8,7 +8,12 @@ public class LevelUpManager : MonoBehaviour
 
     private void OnEnable()
     {
-        LevelData.instance.levelIndex+=1;
+        //if(LevelData.instance.levelIndex<2)
+        //{
+           LevelData.instance.levelIndex+=1;
+        //}
+        
+        GameManager.instance.PlaySuccessAudio();
         if (disableCoroutine != null)
         {
             StopCoroutine(disableCoroutine);
@@ -21,6 +26,7 @@ public class LevelUpManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         LevelData.instance.targetIndex=0;
         
+        GameManager.instance.mainMeneu.SetActive(true);
         // Load the scene first (no need to deactivate the GameObject right before changing scenes)
         SceneManager.LoadScene("CubeGame");
     }

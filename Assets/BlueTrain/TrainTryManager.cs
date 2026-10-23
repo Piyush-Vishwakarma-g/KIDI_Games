@@ -15,10 +15,10 @@ public class TrainTryManager : MonoBehaviour
         int targetIdx = TrainLevelData.instance.targetIndex;
           if(TrainLevelData.instance.levelIndex==1)
           {
-            TrainGameManager.instance.levelOneUI.SetActive(false); 
+           // TrainGameManager.instance.levelOneUI.SetActive(false); 
           } else
           {
-                TrainGameManager.instance.leveltwoUIObject[targetIdx].SetActive(false); 
+           //     TrainGameManager.instance.leveltwoUIObject[targetIdx].SetActive(false); 
           }             
         
     }
@@ -40,10 +40,10 @@ public class TrainTryManager : MonoBehaviour
                         
         if(TrainLevelData.instance.levelIndex==1)
           {
-            TrainGameManager.instance.levelOneUI.SetActive(true); 
+           // TrainGameManager.instance.levelOneUI.SetActive(true); 
           } else
           {
-                TrainGameManager.instance.leveltwoUIObject[targetIdx].SetActive(true); 
+           //     TrainGameManager.instance.leveltwoUIObject[targetIdx].SetActive(true); 
           }  
     }
 }

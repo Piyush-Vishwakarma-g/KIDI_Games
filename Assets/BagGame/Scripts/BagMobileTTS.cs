@@ -29,6 +29,8 @@ public class BagMobileTTS : MonoBehaviour
         if (BagGameManager.instance == null || BagGameManager.instance.title == null) return;
         
         string text = BagGameManager.instance.title.text;
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"</?color(?:=[^>]*)?>", "");
+        
         if (string.IsNullOrEmpty(text)) return;
 
 #if UNITY_EDITOR_WIN
