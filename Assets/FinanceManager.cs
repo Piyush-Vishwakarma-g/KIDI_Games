@@ -67,6 +67,8 @@ public class FinanceManager : MonoBehaviour
                     Debug.Log("You have exceeded the maximum number of selected items!");
                     secondPanel.SetActive(true);
                     firstPanel.SetActive(false);
+                    mobileTTS.SpeakTxt("The  total  is "+ totalPayOutText.text + ",  can  you  pay  the  cashier?" );
+        
                     break;
                 }
             }
@@ -162,6 +164,7 @@ public class FinanceManager : MonoBehaviour
                 Debug.Log("You have selected the full payout amount.");
                 lastSlider.fillRect.GetComponent<Image>().color = Color.green;
                 greatJobPanel.SetActive(true);
+                mobileTTS.SpeakTxt( "Well  done!  You  paid  the  exact  amount,  that's  great!");
             }
             else
             {
