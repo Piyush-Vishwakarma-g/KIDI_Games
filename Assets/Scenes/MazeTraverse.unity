@@ -6446,7 +6446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6df1d4a44b6963a4a9b6c8eb2e0f4602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PacmanMazeCharacterMover
-  moveSpeed: 12
+  moveSpeed: 5
   slider: {fileID: 1232576606}
   audioSource: {fileID: 1012578609}
   successSound: {fileID: 8300000, guid: fc73bad32a6f3954fb6605c8cdd894ca, type: 3}

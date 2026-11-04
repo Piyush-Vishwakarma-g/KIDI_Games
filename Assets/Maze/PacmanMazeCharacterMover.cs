@@ -31,6 +31,7 @@ public class PacmanMazeCharacterMover : MonoBehaviour
 
     public Color[] colorsSlider; // Array of colors for each level
     private Rigidbody2D rb;
+    private Collider2D characterCollider;
     private SpriteRenderer spriteRenderer;
     private Vector3 originalScale;
     public bool hasReachedTarget = false;
@@ -38,12 +39,14 @@ public class PacmanMazeCharacterMover : MonoBehaviour
     private Vector2 moveDirection = Vector2.zero;
     private Vector2 previousPointerPosition;
     private Vector2 pendingSwipeDelta;
+    private bool isPointerDragging;
     public bool isMovingToTarget = false; // Kya player abhi target ki taraf ja raha hai?
 
     private void Awake()
     {
         originalScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
+        characterCollider = GetComponent<Collider2D>();
 
         // Configure Rigidbody for smooth movement without gravity
         rb.bodyType = RigidbodyType2D.Dynamic;
@@ -118,6 +121,7 @@ Debug.Log("DisableAnimator called in Start");
         Pointer currentPointer = Pointer.current;
         if (currentPointer == null)
         {
+            isPointerDragging = false;
             moveDirection = Vector2.zero;
             pendingSwipeDelta = Vector2.zero;
             isMovingToTarget = false;
@@ -126,6 +130,15 @@ Debug.Log("DisableAnimator called in Start");
 
         if (currentPointer.press.wasPressedThisFrame)
         {
+            isPointerDragging = IsPointerOverCharacter(currentPointer.position.ReadValue());
+            if (!isPointerDragging)
+            {
+                moveDirection = Vector2.zero;
+                pendingSwipeDelta = Vector2.zero;
+                isMovingToTarget = false;
+                return;
+            }
+
             previousPointerPosition = currentPointer.position.ReadValue();
             pendingSwipeDelta = Vector2.zero;
             moveDirection = Vector2.zero;
@@ -133,8 +146,9 @@ Debug.Log("DisableAnimator called in Start");
             return;
         }
 
-        if (!currentPointer.press.isPressed)
+        if (!currentPointer.press.isPressed || !isPointerDragging)
         {
+            isPointerDragging = false;
             pendingSwipeDelta = Vector2.zero;
             moveDirection = Vector2.zero;
             isMovingToTarget = false;
@@ -161,6 +175,20 @@ Debug.Log("DisableAnimator called in Start");
 
         pendingSwipeDelta = Vector2.zero;
         isMovingToTarget = true;
+    }
+
+    private bool IsPointerOverCharacter(Vector2 pointerPosition)
+    {
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null)
+        {
+            return false;
+        }
+
+        float cameraDepth = mainCamera.WorldToScreenPoint(transform.position).z;
+        Vector3 screenPosition = new Vector3(pointerPosition.x, pointerPosition.y, cameraDepth);
+        Vector2 worldPosition = mainCamera.ScreenToWorldPoint(screenPosition);
+        return characterCollider.OverlapPoint(worldPosition);
     }
 
     private void FixedUpdate()
