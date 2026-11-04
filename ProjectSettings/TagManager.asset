@@ -16,6 +16,12 @@ TagManager:
   - wall
   - obstacle
   - target
+  - wallboder
+  - goggles
+  - hand
+  - coat
+  - mask
+  - gloves
   layers:
   - Default
   - TransparentFX

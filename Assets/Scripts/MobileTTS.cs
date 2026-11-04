@@ -1,5 +1,7 @@
+using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Text;
 using UnityEngine;
 
 public class MobileTTS : MonoBehaviour
@@ -44,21 +46,50 @@ public class MobileTTS : MonoBehaviour
         _NativeTTS_Speak(text);
 #endif
     }
+    public void SpeakTxt(string _text)
+    {
+        
+        string text = _text;
+        if (string.IsNullOrEmpty(text)) return;
+
+#if UNITY_EDITOR_WIN
+        SpeakInWindowsEditor(text);
+        return;
+#endif
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+        if (androidTTS != null)
+        {
+            androidTTS.CallStatic("speak", text);
+        }
+#elif UNITY_IOS && !UNITY_EDITOR
+        _NativeTTS_Speak(text);
+#endif
+    }
 
 #if UNITY_EDITOR_WIN
     private void SpeakInWindowsEditor(string message)
     {
-        string command = $"Add-Type -AssemblyName System.Speech; $syn = New-Object System.Speech.Synthesis.SpeechSynthesizer; $syn.Speak('{message}');";
-        
+        string escapedMessage = message.Replace("'", "''");
+        string command = $"Add-Type -AssemblyName System.Speech; $syn = New-Object System.Speech.Synthesis.SpeechSynthesizer; $syn.Speak('{escapedMessage}');";
+        string encodedCommand = Convert.ToBase64String(Encoding.Unicode.GetBytes(command));
+
         ProcessStartInfo psi = new ProcessStartInfo
         {
             FileName = "powershell.exe",
-            Arguments = $"-Command \"{command}\"",
+            Arguments = $"-NoProfile -NonInteractive -EncodedCommand {encodedCommand}",
             CreateNoWindow = true,
             UseShellExecute = false
         };
 
-        Process.Start(psi);
+        Process process = Process.Start(psi);
+        if (process == null)
+        {
+            UnityEngine.Debug.LogError("Could not start PowerShell for Windows text-to-speech.");
+            return;
+        }
+
+        process.Dispose();
         UnityEngine.Debug.Log("[Windows Editor TTS]: " + message);
     }
 #endif

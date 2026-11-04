@@ -32,12 +32,12 @@ public class PacmanMazeCharacterMover : MonoBehaviour
     public Color[] colorsSlider; // Array of colors for each level
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-    private Camera mainCamera;
     private Vector3 originalScale;
     public bool hasReachedTarget = false;
 
     private Vector2 moveDirection = Vector2.zero;
-    private Vector2 targetWorldPos;      // Jahan user ne touch kiya hai, woh world position
+    private Vector2 previousPointerPosition;
+    private Vector2 pendingSwipeDelta;
     public bool isMovingToTarget = false; // Kya player abhi target ki taraf ja raha hai?
 
     private void Awake()
@@ -49,9 +49,10 @@ public class PacmanMazeCharacterMover : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-        mainCamera = Camera.main;
 
         // Auto-get AudioSource if not assigned
         if (audioSource == null)
@@ -109,32 +110,57 @@ Debug.Log("DisableAnimator called in Start");
 
     private void Update()
     {
-        if (hasReachedTarget) return;
+        if (hasReachedTarget)
+        {
+            return;
+        }
 
         Pointer currentPointer = Pointer.current;
-        if (currentPointer == null) return;
+        if (currentPointer == null)
+        {
+            moveDirection = Vector2.zero;
+            pendingSwipeDelta = Vector2.zero;
+            isMovingToTarget = false;
+            return;
+        }
 
-        // Jab tap/click ho
         if (currentPointer.press.wasPressedThisFrame)
         {
-            Vector2 screenPos = currentPointer.position.ReadValue();
-            targetWorldPos = mainCamera.ScreenToWorldPoint(screenPos);
-            Vector2 charPos = (Vector2)transform.position;
-
-            Vector2 diff = targetWorldPos - charPos;
-
-            // Direction decide karo
-            if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
-            {
-                moveDirection = (diff.x > 0) ? Vector2.right : Vector2.left;
-            }
-            else
-            {
-                moveDirection = (diff.y > 0) ? Vector2.up : Vector2.down;
-            }
-
-            isMovingToTarget = true; // Movement start karo
+            previousPointerPosition = currentPointer.position.ReadValue();
+            pendingSwipeDelta = Vector2.zero;
+            moveDirection = Vector2.zero;
+            isMovingToTarget = false;
+            return;
         }
+
+        if (!currentPointer.press.isPressed)
+        {
+            pendingSwipeDelta = Vector2.zero;
+            moveDirection = Vector2.zero;
+            isMovingToTarget = false;
+            return;
+        }
+
+        Vector2 pointerPosition = currentPointer.position.ReadValue();
+        pendingSwipeDelta += pointerPosition - previousPointerPosition;
+        previousPointerPosition = pointerPosition;
+
+        if (pendingSwipeDelta.sqrMagnitude < 4f)
+        {
+            return;
+        }
+
+        if (Mathf.Abs(pendingSwipeDelta.x) > Mathf.Abs(pendingSwipeDelta.y))
+        {
+            moveDirection = pendingSwipeDelta.x > 0f ? Vector2.right : Vector2.left;
+        }
+        else
+        {
+            moveDirection = pendingSwipeDelta.y > 0f ? Vector2.up : Vector2.down;
+        }
+
+        pendingSwipeDelta = Vector2.zero;
+        isMovingToTarget = true;
     }
 
     private void FixedUpdate()
@@ -147,63 +173,12 @@ Debug.Log("DisableAnimator called in Start");
 
         if (isMovingToTarget)
         {
-            Vector2 currentPos = (Vector2)transform.position;
-
-            // Check karo ki player touch/target position par pahunch gaya ya cross karne wala hai
-            bool hasPassedTarget = false;
-
-            if (moveDirection == Vector2.up && currentPos.y >= targetWorldPos.y)
-            {
-                hasPassedTarget = true;
-            }
-            else if (moveDirection == Vector2.down && currentPos.y <= targetWorldPos.y)
-            {
-                hasPassedTarget = true;
-            }
-            else if (moveDirection == Vector2.right && currentPos.x >= targetWorldPos.x)
-            {
-                hasPassedTarget = true;
-            }
-            else if (moveDirection == Vector2.left && currentPos.x <= targetWorldPos.x)
-            {
-                hasPassedTarget = true;
-            }
-
-            if (hasPassedTarget)
-            {
-                // Target par pahunch gaya, ab ruk jao aur exact position par snap kar do
-                StopMovementAtTarget();
-            }
-            else
-            {
-                // Move karte raho
-                rb.linearVelocity = moveDirection * moveSpeed;
-            }
+            rb.linearVelocity = moveDirection * moveSpeed;
         }
         else
         {
             rb.linearVelocity = Vector2.zero;
         }
-    }
-
-    private void StopMovementAtTarget()
-    {
-        rb.linearVelocity = Vector2.zero;
-
-        // Exact touch position par snap kar do taaki aage na nikle
-        Vector3 pos = transform.position;
-        if (moveDirection == Vector2.up || moveDirection == Vector2.down)
-        {
-            pos.y = targetWorldPos.y;
-        }
-        else if (moveDirection == Vector2.left || moveDirection == Vector2.right)
-        {
-            pos.x = targetWorldPos.x;
-        }
-        transform.position = pos;
-
-        isMovingToTarget = false;
-        moveDirection = Vector2.zero;
     }
 
     private void LateUpdate()
@@ -217,6 +192,16 @@ Debug.Log("DisableAnimator called in Start");
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.collider.CompareTag("MazeWall") ||
+            collision.collider.CompareTag("wallboder"))
+        {
+            rb.linearVelocity = Vector2.zero;
+            moveDirection = Vector2.zero;
+            pendingSwipeDelta = Vector2.zero;
+            isMovingToTarget = false;
+            return;
+        }
+
         CheckTarget(collision.collider);
     }
 

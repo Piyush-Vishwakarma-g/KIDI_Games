@@ -30,7 +30,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: b15707033da313342b08bee6ff4db628, type: 3}
+        m_Texture: {fileID: 2800000, guid: 97f8dd97efacbc342a3a1870fc23e58e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -54,7 +54,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b15707033da313342b08bee6ff4db628, type: 3}
+        m_Texture: {fileID: 2800000, guid: 97f8dd97efacbc342a3a1870fc23e58e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -137,9 +137,9 @@ Material:
     - _XRMotionVectorsPass: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.13803846, g: 0.82553077, b: 0.8867924, a: 1}
+    - _BaseColor: {r: 0.9493841, g: 0.9890704, b: 0.9924528, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 0.13803843, g: 0.82553077, b: 0.8867924, a: 1}
+    - _Color: {r: 0.94938403, g: 0.98907036, b: 0.9924528, a: 1}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}

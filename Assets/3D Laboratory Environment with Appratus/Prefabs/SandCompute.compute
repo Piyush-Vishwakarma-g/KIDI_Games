@@ -1,0 +1,27 @@
+#pragma kernel UpdateParticles
+
+struct Particle
+{
+    float2 position;
+    float2 velocity;
+    uint type;
+    uint active;
+};
+
+RWStructuredBuffer<Particle> particles;
+
+[numthreads(64, 1, 1)]
+void UpdateParticles(uint3 id : SV_DispatchThreadID)
+{
+    uint i = id.x;
+    Particle p = particles[i];
+
+    if (p.active == 0)
+        return;
+
+    // Gravity and movement will be calculated here.
+    p.velocity.y -= 9.81 * 0.016;
+    p.position += p.velocity * 0.016;
+
+    particles[i] = p;
+}
