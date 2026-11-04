@@ -42,6 +42,9 @@ public class PacmanMazeCharacterMover : MonoBehaviour
     private bool isPointerDragging;
     public bool isMovingToTarget = false; // Kya player abhi target ki taraf ja raha hai?
 
+    public Transform startPostionCharacter;
+    private Vector2 startCharacterPosition;
+
     private void Awake()
     {
         originalScale = transform.localScale;
@@ -91,7 +94,17 @@ public class PacmanMazeCharacterMover : MonoBehaviour
     void Start()
     {
         DisableAnimator();
-Debug.Log("DisableAnimator called in Start");
+        Debug.Log("DisableAnimator called in Start");
+        startCharacterPosition = rb.position;
+        if (startPostionCharacter == null)
+        {
+            Debug.LogWarning("Start position reference is not assigned. The character's current position will be used as its start position.", this);
+        }
+        else
+        {
+            startPostionCharacter.position = startCharacterPosition;
+        }
+
         if (MazeTraverseManager.instance != null && targetObjectsArry != null)
         {
             int currentLevel = MazeTraverseManager.instance.mazeLevelIndex;
@@ -223,10 +236,6 @@ Debug.Log("DisableAnimator called in Start");
         if (collision.collider.CompareTag("MazeWall") ||
             collision.collider.CompareTag("wallboder"))
         {
-            rb.linearVelocity = Vector2.zero;
-            moveDirection = Vector2.zero;
-            pendingSwipeDelta = Vector2.zero;
-            isMovingToTarget = false;
             return;
         }
 
@@ -277,25 +286,25 @@ Debug.Log("DisableAnimator called in Start");
                     PlaySuccessAudio();
                     StartCoroutine(ReloadSceneAfterDelay());
                 }
-                else if (!MazeTraverseManager.instance.isbedsheet && other.gameObject.name == "blanket" && MazeTraverseManager.instance.mazeLevelIndex == 1)
-                {
-                    if (greatJobPopup != null)
-                    {
-                        greatJobPopup.SetActive(true);
-                    }
-                    MazeTraverseManager.instance.isbedsheet = true;
-                    other.transform.GetChild(0).gameObject.SetActive(true);
-                    other.transform.GetComponent<BoxCollider2D>().enabled = false;
-                    PlaySuccessAudio();
-                    StartCoroutine(ReloadSceneAfterDelay());
-                }
-                else if (!MazeTraverseManager.instance.isblackBall && other.gameObject.name == "ball" && MazeTraverseManager.instance.mazeLevelIndex == 2)
+                else if (!MazeTraverseManager.instance.isblackBall && other.gameObject.name == "blanket" && MazeTraverseManager.instance.mazeLevelIndex == 1)
                 {
                     if (greatJobPopup != null)
                     {
                         greatJobPopup.SetActive(true);
                     }
                     MazeTraverseManager.instance.isblackBall = true;
+                    other.transform.GetChild(0).gameObject.SetActive(true);
+                    other.transform.GetComponent<BoxCollider2D>().enabled = false;
+                    PlaySuccessAudio();
+                    StartCoroutine(ReloadSceneAfterDelay());
+                }
+                else if (!MazeTraverseManager.instance.isbedsheet && other.gameObject.name == "ball" && MazeTraverseManager.instance.mazeLevelIndex == 2)
+                {
+                    if (greatJobPopup != null)
+                    {
+                        greatJobPopup.SetActive(true);
+                    }
+                    MazeTraverseManager.instance.isbedsheet = true;
                     other.transform.GetChild(0).gameObject.SetActive(true);
                     other.transform.GetComponent<BoxCollider2D>().enabled = false;
                     PlaySuccessAudio();
@@ -364,6 +373,7 @@ Debug.Log("DisableAnimator called in Start");
         isMovingToTarget = false;
         moveDirection = Vector2.zero;
         rb.linearVelocity = Vector2.zero;
+        rb.position = startCharacterPosition;
 
         // Reset character color
         if (spriteRenderer != null)

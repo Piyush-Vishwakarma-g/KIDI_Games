@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,6 +47,7 @@ public class FinanceManager : MonoBehaviour
     public void CheckTotalSelectedItems()
     {
         int totalSelectedItems = 0;
+        bool shouldSpeakTotal = false;
 
         for (int i = 0; i < fourSelectedItemIndexes.Length; i++)
         {
@@ -64,11 +66,10 @@ public class FinanceManager : MonoBehaviour
                 totalSelectedItems++;
                 if (totalSelectedItems == totalMaxSelectedItems)
                 {
-                    Debug.Log("You have exceeded the maximum number of selected items!");
+                    Debug.Log("You have exceeded the maximum number of selected items!"+totalPriceText.text );
+                    shouldSpeakTotal = !secondPanel.activeSelf;
                     secondPanel.SetActive(true);
                     firstPanel.SetActive(false);
-                    mobileTTS.SpeakTxt("The  total  is "+ totalPayOutText.text + ",  can  you  pay  the  cashier?" );
-        
                     break;
                 }
             }
@@ -122,6 +123,21 @@ public class FinanceManager : MonoBehaviour
         lastSliderText.text = 0.ToString("F2");
         lastSlider.value = 0;
         lastSpeakingText.text = "0.00€";
+
+        if (shouldSpeakTotal)
+        {
+            StartCoroutine(SpeakTotalAfterDelay());
+        }
+    }
+
+    private IEnumerator SpeakTotalAfterDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        if (secondPanel.activeInHierarchy)
+        {
+            mobileTTS.SpeakTxt("The  total  is " + totalPriceText.text + ",  can  you  pay  the  cashier?");
+        }
     }
 
     private float CalculateTotalPrice()

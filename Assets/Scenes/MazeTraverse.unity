@@ -2686,8 +2686,8 @@ GameObject:
   m_Component:
   - component: {fileID: 788529396}
   - component: {fileID: 788529395}
-  - component: {fileID: 788529394}
   - component: {fileID: 788529393}
+  - component: {fileID: 788529397}
   m_Layer: 5
   m_Name: LevelUp (1)
   m_TagString: Untagged
@@ -2725,18 +2725,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &788529394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788529392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfc990919811ee845a2bcd0e5bfeacc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TraverseGreatJobManager
 --- !u!222 &788529395
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2767,6 +2755,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 385.32532, y: 288.8529}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &788529397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788529392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f78f7d015174d841ababce4fbe368f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &804865912
 GameObject:
   m_ObjectHideFlags: 0
@@ -6469,6 +6469,7 @@ MonoBehaviour:
   - {r: 0.033729315, g: 1, b: 0, a: 0.9882353}
   hasReachedTarget: 0
   isMovingToTarget: 0
+  startPostionCharacter: {fileID: 0}
 --- !u!50 &2144478904
 Rigidbody2D:
   serializedVersion: 5
