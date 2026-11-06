@@ -83,7 +83,7 @@ public class RectTransformLerp : MonoBehaviour
             // Final snap
             target.anchoredPosition = source.anchoredPosition;
         }
-
+CheckRobotPositionAndSetButtons();
         Debug.Log("RectTransform Translation Complete!");
     }
 
@@ -139,7 +139,7 @@ public class RectTransformLerp : MonoBehaviour
         startIndex=value;
         sourceRect = tileRects[startIndex];
         Debug.Log("Bottom button clicked at index " + value);
-        EnableDisableButtons(false);
+       // EnableDisableButtons(false);
         TriggerMove();
     }
     public void OnUpButtonClick()
@@ -198,7 +198,7 @@ public class RectTransformLerp : MonoBehaviour
         sourceRect = tileRects[startIndex];
         Debug.Log("Up button clicked at index " + value);
         TriggerMove();
-        EnableDisableButtons(false);
+        //EnableDisableButtons(false);
     }
     public void OnLeftButtonClick()
     {
@@ -253,7 +253,7 @@ public class RectTransformLerp : MonoBehaviour
         sourceRect = tileRects[startIndex];
         Debug.Log("Left button clicked at index " + value);
         TriggerMove();
-        EnableDisableButtons(false);
+        //EnableDisableButtons(false);
     }
     public void OnRightButtonClick()
     {
@@ -310,7 +310,7 @@ public class RectTransformLerp : MonoBehaviour
         sourceRect = tileRects[startIndex];
         Debug.Log("Right button clicked at index " + value);
         TriggerMove();
-        EnableDisableButtons(false);
+        //EnableDisableButtons(false);
     }
 
     public void waterBtnClick()
@@ -318,6 +318,7 @@ public class RectTransformLerp : MonoBehaviour
         Debug.Log("Water button clicked");
         // Add your water button logic here
         targetRect.transform.GetChild(0).gameObject.SetActive(true); // Activate the first child of targetRect
+       EnableDisableButtons(false);
         StartCoroutine(DeactivateAfterDelay(targetRect.transform.GetChild(0).gameObject, 2f)); // Deactivate after 2 seconds    
     }
 
@@ -355,6 +356,48 @@ public class RectTransformLerp : MonoBehaviour
         foreach (Button button in buttons)
         {
             button.interactable = enable;
+        }
+
+        if (enable)
+        {
+            CheckRobotPositionAndSetButtons();
+        }
+    }
+
+    private void CheckRobotPositionAndSetButtons()
+    {
+        if (buttons == null || buttons.Length < 4)
+        {
+            Debug.LogError("At least four buttons must be assigned.");
+            return;
+        }
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].interactable = true; // Enable all buttons initially
+        }
+
+        if (startIndex == 10 || startIndex == 9 || startIndex == 8)
+        {
+            buttons[3].interactable = false;
+        }
+
+        if (startIndex == 4 || startIndex == 1 || startIndex == 0)
+        {
+            buttons[2].interactable = false;
+        }
+
+        if (startIndex == 4 || startIndex == 7 || startIndex == 10)
+        {
+            buttons[0].interactable = false;
+        }
+
+        if (startIndex == 8 || startIndex == 5 || startIndex == 2 || startIndex == 0)
+        {
+            buttons[1].interactable = false;
+        }
+        if(startIndex==1 )
+        {
+            buttons[0].interactable = false;
         }
     }
 }
