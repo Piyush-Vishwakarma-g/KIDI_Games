@@ -36,9 +36,9 @@ public class PacmanMazeCharacterMover : MonoBehaviour
     private Vector3 originalScale;
     public bool hasReachedTarget = false;
 
-    private Vector2 moveDirection = Vector2.zero;
-    private Vector2 previousPointerPosition;
-    private Vector2 pendingSwipeDelta;
+    private Vector2 targetPosition;
+    private Vector2 pointerToCharacterOffset;
+    private bool isPointerActive;
     private bool isPointerDragging;
     public bool isMovingToTarget = false; // Kya player abhi target ki taraf ja raha hai?
 
@@ -134,74 +134,68 @@ public class PacmanMazeCharacterMover : MonoBehaviour
         Pointer currentPointer = Pointer.current;
         if (currentPointer == null)
         {
+            isPointerActive = false;
             isPointerDragging = false;
-            moveDirection = Vector2.zero;
-            pendingSwipeDelta = Vector2.zero;
-            isMovingToTarget = false;
             return;
         }
 
         if (currentPointer.press.wasPressedThisFrame)
         {
-            isPointerDragging = IsPointerOverCharacter(currentPointer.position.ReadValue());
-            if (!isPointerDragging)
+            Vector2 pointerPosition = currentPointer.position.ReadValue();
+            if (!TryGetWorldPosition(pointerPosition, out Vector2 worldPosition))
             {
-                moveDirection = Vector2.zero;
-                pendingSwipeDelta = Vector2.zero;
+                isPointerActive = false;
+                isPointerDragging = false;
                 isMovingToTarget = false;
                 return;
             }
 
-            previousPointerPosition = currentPointer.position.ReadValue();
-            pendingSwipeDelta = Vector2.zero;
-            moveDirection = Vector2.zero;
-            isMovingToTarget = false;
+            isPointerActive = true;
+            isPointerDragging = characterCollider.OverlapPoint(worldPosition);
+            if (isPointerDragging)
+            {
+                pointerToCharacterOffset = rb.position - worldPosition;
+                targetPosition = rb.position;
+                isMovingToTarget = false;
+            }
+            else
+            {
+                targetPosition = worldPosition;
+                isMovingToTarget = (targetPosition - rb.position).sqrMagnitude > 0.0004f;
+            }
             return;
         }
 
-        if (!currentPointer.press.isPressed || !isPointerDragging)
+        if (!currentPointer.press.isPressed)
         {
+            isPointerActive = false;
             isPointerDragging = false;
-            pendingSwipeDelta = Vector2.zero;
-            moveDirection = Vector2.zero;
-            isMovingToTarget = false;
             return;
         }
 
-        Vector2 pointerPosition = currentPointer.position.ReadValue();
-        pendingSwipeDelta += pointerPosition - previousPointerPosition;
-        previousPointerPosition = pointerPosition;
-
-        if (pendingSwipeDelta.sqrMagnitude < 4f)
+        if (isPointerActive && isPointerDragging)
         {
-            return;
+            if (TryGetWorldPosition(currentPointer.position.ReadValue(), out Vector2 worldPosition))
+            {
+                targetPosition = worldPosition + pointerToCharacterOffset;
+                isMovingToTarget = (targetPosition - rb.position).sqrMagnitude > 0.0004f;
+            }
         }
-
-        if (Mathf.Abs(pendingSwipeDelta.x) > Mathf.Abs(pendingSwipeDelta.y))
-        {
-            moveDirection = pendingSwipeDelta.x > 0f ? Vector2.right : Vector2.left;
-        }
-        else
-        {
-            moveDirection = pendingSwipeDelta.y > 0f ? Vector2.up : Vector2.down;
-        }
-
-        pendingSwipeDelta = Vector2.zero;
-        isMovingToTarget = true;
     }
 
-    private bool IsPointerOverCharacter(Vector2 pointerPosition)
+    private bool TryGetWorldPosition(Vector2 pointerPosition, out Vector2 worldPosition)
     {
         Camera mainCamera = Camera.main;
         if (mainCamera == null)
         {
+            worldPosition = default;
             return false;
         }
 
         float cameraDepth = mainCamera.WorldToScreenPoint(transform.position).z;
         Vector3 screenPosition = new Vector3(pointerPosition.x, pointerPosition.y, cameraDepth);
-        Vector2 worldPosition = mainCamera.ScreenToWorldPoint(screenPosition);
-        return characterCollider.OverlapPoint(worldPosition);
+        worldPosition = mainCamera.ScreenToWorldPoint(screenPosition);
+        return true;
     }
 
     private void FixedUpdate()
@@ -214,7 +208,16 @@ public class PacmanMazeCharacterMover : MonoBehaviour
 
         if (isMovingToTarget)
         {
-            rb.linearVelocity = moveDirection * moveSpeed;
+            Vector2 toTarget = targetPosition - rb.position;
+            if (toTarget.sqrMagnitude <= 0.0004f)
+            {
+                rb.linearVelocity = Vector2.zero;
+                isMovingToTarget = false;
+            }
+            else
+            {
+                rb.linearVelocity = Vector2.ClampMagnitude(toTarget / Time.fixedDeltaTime, moveSpeed);
+            }
         }
         else
         {
@@ -255,7 +258,6 @@ public class PacmanMazeCharacterMover : MonoBehaviour
         {
             hasReachedTarget = true;
             isMovingToTarget = false;
-            moveDirection = Vector2.zero;
             rb.linearVelocity = Vector2.zero;
 
             // 1. Turn character Green
@@ -332,7 +334,6 @@ public class PacmanMazeCharacterMover : MonoBehaviour
                     SimpleAudioPlayerTraversePath.instance.PlaySound2();
                     hasReachedTarget = false;
                     isMovingToTarget = false;
-                    moveDirection = Vector2.zero;
                     rb.linearVelocity = Vector2.zero;
                     // Reset character color
                     if (spriteRenderer != null)
@@ -371,7 +372,6 @@ public class PacmanMazeCharacterMover : MonoBehaviour
 
         hasReachedTarget = false;
         isMovingToTarget = false;
-        moveDirection = Vector2.zero;
         rb.linearVelocity = Vector2.zero;
         rb.position = startCharacterPosition;
 
