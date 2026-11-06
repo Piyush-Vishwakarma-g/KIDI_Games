@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class MobileTTS : MonoBehaviour
@@ -71,7 +72,7 @@ public class MobileTTS : MonoBehaviour
     private void SpeakInWindowsEditor(string message)
     {
         string escapedMessage = message.Replace("'", "''");
-        string command = $"Add-Type -AssemblyName System.Speech; $syn = New-Object System.Speech.Synthesis.SpeechSynthesizer; $syn.Speak('{escapedMessage}');";
+        string command = $"$ErrorActionPreference = 'Stop'; $syn = $null; $failed = $false; try {{ Add-Type -AssemblyName System.Speech; $syn = New-Object System.Speech.Synthesis.SpeechSynthesizer; $syn.Volume = 100; $syn.SetOutputToDefaultAudioDevice(); $syn.Speak('{escapedMessage}'); }} catch {{ [Console]::Error.WriteLine($_.Exception.ToString()); $failed = $true; }} finally {{ if ($syn -ne $null) {{ $syn.Dispose(); }} }}; if ($failed) {{ exit 1; }}";
         string encodedCommand = Convert.ToBase64String(Encoding.Unicode.GetBytes(command));
 
         ProcessStartInfo psi = new ProcessStartInfo
@@ -79,18 +80,53 @@ public class MobileTTS : MonoBehaviour
             FileName = "powershell.exe",
             Arguments = $"-NoProfile -NonInteractive -EncodedCommand {encodedCommand}",
             CreateNoWindow = true,
-            UseShellExecute = false
+            UseShellExecute = false,
+            RedirectStandardError = true
         };
 
-        Process process = Process.Start(psi);
-        if (process == null)
+        Process process = new Process
         {
+            StartInfo = psi
+        };
+        StringBuilder errorOutput = new StringBuilder();
+        process.ErrorDataReceived += (sender, args) =>
+        {
+            if (!string.IsNullOrEmpty(args.Data))
+            {
+                lock (errorOutput)
+                {
+                    errorOutput.AppendLine(args.Data);
+                }
+            }
+        };
+
+        if (!process.Start())
+        {
+            process.Dispose();
             UnityEngine.Debug.LogError("Could not start PowerShell for Windows text-to-speech.");
             return;
         }
 
-        process.Dispose();
-        UnityEngine.Debug.Log("[Windows Editor TTS]: " + message);
+        process.BeginErrorReadLine();
+        Task.Run(() =>
+        {
+            process.WaitForExit();
+            process.WaitForExit();
+
+            if (process.ExitCode != 0)
+            {
+                string error;
+                lock (errorOutput)
+                {
+                    error = errorOutput.ToString();
+                }
+
+                UnityEngine.Debug.LogError("Windows text-to-speech failed: " + error);
+            }
+
+            process.Dispose();
+        });
+        UnityEngine.Debug.Log("[Windows Editor TTS] Speech request started: " + message);
     }
 #endif
 }

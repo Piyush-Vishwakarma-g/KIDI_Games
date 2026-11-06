@@ -37,12 +37,19 @@ public class FinanceManager : MonoBehaviour
     public Slider lastSlider;
     public TMP_Text lastSliderText;
     public TMP_Text totalDepositMoney;
+    public TMP_Text totalChangeText;
+    public GameObject changePannel;
 
     public GameObject greatJobPanel;
 
     public MobileTTS mobileTTS;
-    
-    
+    private int totalTenderedCents;
+
+    public void Start()
+    {
+        changePannel.SetActive(false);
+        greatJobPanel.SetActive(false);
+    }
 
     public void CheckTotalSelectedItems()
     {
@@ -120,9 +127,11 @@ public class FinanceManager : MonoBehaviour
             lastSlider.maxValue = float.Parse(totalPayOutText.text);
         }
         totalDepositMoney.text = totalDepositMoneyValue.ToString("F2");
+        totalChangeText.text = "0.00";
         lastSliderText.text = 0.ToString("F2");
         lastSlider.value = 0;
         lastSpeakingText.text = "0.00€";
+        totalTenderedCents = 0;
 
         if (shouldSpeakTotal)
         {
@@ -165,33 +174,50 @@ public class FinanceManager : MonoBehaviour
     public void OnEuroBtnClick(float value)
     {
         int payoutCents = Mathf.RoundToInt(lastSlider.maxValue * 100f);
-        int currentCents = Mathf.RoundToInt(lastSlider.value * 100f);
         int selectedCents = Mathf.RoundToInt(value * 100f);
-        int newTotalCents = currentCents + selectedCents;
+        int previousTenderedCents = totalTenderedCents;
+        totalTenderedCents += selectedCents;
+        int paidCents = Mathf.Min(totalTenderedCents, payoutCents);
+        int changeCents = Mathf.Max(0, totalTenderedCents - payoutCents);
 
-        if (newTotalCents <= payoutCents)
+        lastSlider.value = paidCents / 100f;
+        lastSliderText.text = lastSlider.value.ToString("F2");
+        lastSpeakingText.text = lastSlider.value.ToString("F2") + "€";
+        totalDepositMoney.text = (totalDepositMoneyValue - lastSlider.value).ToString("F2");
+        totalChangeText.text = (changeCents / 100f).ToString("F2");
+
+        if (totalTenderedCents >= payoutCents)
         {
-            lastSlider.value = newTotalCents / 100f;
-            lastSliderText.text = lastSlider.value.ToString("F2");
-            lastSpeakingText.text =  lastSlider.value.ToString("F2") + "€";
-            totalDepositMoney.text = (totalDepositMoneyValue - lastSlider.value).ToString("F2");
-            if (newTotalCents == payoutCents)
+            lastSlider.fillRect.GetComponent<Image>().color = Color.green;
+            //greatJobPanel.SetActive(true);
+            StartCoroutine(ShowGreatJobPanelAfterDelay());
+
+            if (previousTenderedCents < payoutCents)
             {
-                Debug.Log("You have selected the full payout amount.");
-                lastSlider.fillRect.GetComponent<Image>().color = Color.green;
-                greatJobPanel.SetActive(true);
-                mobileTTS.SpeakTxt( "Well  done!  You  paid  the  exact  amount,  that's  great!");
-            }
-            else
-            {
-                lastSlider.fillRect.GetComponent<Image>().color = Color.orange;
+                if (changeCents == 0)
+                {
+                    Debug.Log("You have selected the full payout amount.");
+                    mobileTTS.SpeakTxt("Well  done!  You  paid  the  exact  amount,  that's  great!");
+                }
+                else
+                {
+                    changePannel.SetActive(true);
+                    Debug.Log("You have selected more than the payout amount. Your change is: " + totalChangeText.text);
+                    mobileTTS.SpeakTxt("Well  done!  Your  change  is  " + totalChangeText.text + "  euros.");
+                }
             }
         }
         else
         {
-            Debug.LogWarning("Selected value exceeds the total payout amount.");
+            lastSlider.fillRect.GetComponent<Image>().color = Color.orange;
         }
        
     }
-    
+
+    private IEnumerator ShowGreatJobPanelAfterDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        greatJobPanel.SetActive(true);
+        StopCoroutine(ShowGreatJobPanelAfterDelay());
+    }
 }
