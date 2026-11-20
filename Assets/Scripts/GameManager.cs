@@ -54,7 +54,13 @@ public class GameManager : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     
-    
+    public void OnBarvoBackClicked()
+    {
+        LevelData.instance.levelIndex = 1;
+        LevelData.instance.targetIndex = 0;
+        mainMeneu.SetActive(true);
+       SceneManager.LoadScene("CubeGame");
+    }
     public void Start()
     {
         DisableAllLevelCubeObjects();
@@ -65,7 +71,7 @@ public class GameManager : MonoBehaviour
             backBtn.onClick.AddListener(OnBackButtonClicked);
         }
         SetTargetName();
-
+        mainMeneu.SetActive(true);
         if (LevelData.instance != null && levelText != null)
         {
             if (LevelData.instance.levelIndex > 1)
@@ -76,7 +82,7 @@ public class GameManager : MonoBehaviour
             SetLevelObject();
 
         }
-        levelCubeObj[LevelData.instance.levelIndex - 1].SetActive(true);
+        ActivateCurrentLevelCube();
 
     }
     public void DisableAllLevelCubeObjects()
@@ -170,6 +176,24 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("[GameManager] SceneManagerScript instance not found.");
         }
     }
+    private void ActivateCurrentLevelCube()
+    {
+        if (LevelData.instance == null || levelCubeObj == null)
+        {
+            Debug.LogWarning("[GameManager] Cannot activate a level cube because level data or level objects are missing.");
+            return;
+        }
+
+        int index = LevelData.instance.levelIndex - 1;
+        if (index < 0 || index >= levelCubeObj.Length || levelCubeObj[index] == null)
+        {
+            Debug.LogWarning("[GameManager] Level index does not match an assigned level cube.");
+            return;
+        }
+
+        levelCubeObj[index].SetActive(true);
+    }
+
     public void LoadGameLevel(int val)
     {
         LevelData.instance.levelIndex = val;
@@ -186,7 +210,7 @@ public class GameManager : MonoBehaviour
 
         }
         DisableAllLevelCubeObjects();
-        levelCubeObj[LevelData.instance.levelIndex - 1].SetActive(true);
+        ActivateCurrentLevelCube();
     }
     public void SetLevelObject()
     {
