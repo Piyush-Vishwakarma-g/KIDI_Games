@@ -29,7 +29,7 @@ public class TraverseLevelUpManager : MonoBehaviour
         MazeTraverseManager.instance.isbedsheet = false;
         MazeTraverseManager.instance.isheadPhone = false;
         MazeTraverseManager.instance.istravel = false;
-        SceneManager.LoadScene("MazeTraverse");
+       // SceneManager.LoadScene("MazeTraverse");
     }
 
     private void OnDisable()

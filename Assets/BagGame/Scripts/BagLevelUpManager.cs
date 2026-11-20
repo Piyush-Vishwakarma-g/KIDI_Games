@@ -36,7 +36,7 @@ public class BagLevelUpManager : MonoBehaviour
         }
 
         // Asynchronous loading prevents main thread frame stutter
-        SceneManager.LoadSceneAsync("BagGame");
+       // SceneManager.LoadSceneAsync("BagGame");
     }
 
     private void OnDisable()

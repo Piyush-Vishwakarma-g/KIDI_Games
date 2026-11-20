@@ -28,10 +28,10 @@ public class LevelUpManager : MonoBehaviour
         mobileTTS.SpeakTxt("You succeeded, try it without the tablet.");
         yield return new WaitForSeconds(4f);
         LevelData.instance.targetIndex=0;
-        
+        this.gameObject.SetActive(false);
         GameManager.instance.mainMeneu.SetActive(true);
         // Load the scene first (no need to deactivate the GameObject right before changing scenes)
-       // SceneManager.LoadScene("CubeGame");
+        SceneManager.LoadScene("CubeGame");
     }
 
     private void OnDisable()
