@@ -18,9 +18,7 @@ public class SceneManagerScript : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Call this from React Native via unityRef.current.postMessage('RNBridgeManager', 'LoadSceneFromRN', sceneName)
-    /// </summary>
+    
     public void LoadSceneFromRN(string sceneName)
     {
         if (string.IsNullOrEmpty(sceneName))

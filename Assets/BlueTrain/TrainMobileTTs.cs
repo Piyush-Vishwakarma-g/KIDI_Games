@@ -46,6 +46,27 @@ public class TrainMobileTTs : MonoBehaviour
 #endif
     }
 
+    public void SpeakTxt(string _text)
+    {
+        
+        string text = _text;
+        if (string.IsNullOrEmpty(text)) return;
+
+#if UNITY_EDITOR_WIN
+        SpeakInWindowsEditor(text);
+        return;
+#endif
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+        if (androidTTS != null)
+        {
+            androidTTS.CallStatic("speak", text);
+        }
+#elif UNITY_IOS && !UNITY_EDITOR
+        _NativeTTS_Speak(text);
+#endif
+    }
+
 #if UNITY_EDITOR_WIN
     private void SpeakInWindowsEditor(string message)
     {

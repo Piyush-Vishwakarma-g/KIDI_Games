@@ -3,15 +3,23 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;  
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class FinanceManager : MonoBehaviour
 {
+    public GameObject currenyPannel;
+    public GameObject[] currencyFocus;
+    public TMP_Text[] currencySymbols;
+    public string currencySymbolText;
+
+    public TMP_Text[] firstPannelCurrencySymbolText;
+    public GameObject[] thirdPannelCurrencySymbol;
+    public int currentCurrencyIndex = 0;
     public GameObject firstPanel;
-    public GameObject secondPanel;  
-    public int totalMaxSelectedItems=4;
-    public int totalDepositMoneyValue=500;
+    public GameObject secondPanel;
+    public int totalMaxSelectedItems = 4;
+    public int totalDepositMoneyValue = 500;
     public Button backButton;
     public int[] fourSelectedItemIndexes = new int[4];
     public TMP_Text[] fourSelectedItemNames = new TMP_Text[4];
@@ -26,8 +34,8 @@ public class FinanceManager : MonoBehaviour
     public Image[] lastSelectedItemImages = new Image[4];
 
     public TMP_Text lastTotalPriceText;
-    
-    
+
+
     public GameObject[] selectedItemsAry;
     public String[] selectedItemsNameAry;
     public String[] selectedItemsPriceAry;
@@ -49,6 +57,47 @@ public class FinanceManager : MonoBehaviour
     {
         changePannel.SetActive(false);
         greatJobPanel.SetActive(false);
+        AllCurrencyFocusOff();
+        //thirdPannelCurrencySymbol[currentCurrencyIndex].SetActive(true);
+    }
+
+    public void AllCurrencyFocusOff()
+    {
+        for (int i = 0; i < currencyFocus.Length; i++)
+        {
+            currencyFocus[i].SetActive(false);
+        }
+        for (int i = 0; i < thirdPannelCurrencySymbol.Length; i++)
+        {
+            thirdPannelCurrencySymbol[i].SetActive(false);
+        }
+    }
+
+    public void SetCurrencyFocus(int index)
+    {
+        AllCurrencyFocusOff();
+        if (index >= 0 && index < currencyFocus.Length)
+        {
+            currencyFocus[index].SetActive(true);
+            currentCurrencyIndex = index;
+        }
+        else
+        {
+            Debug.LogError("Invalid currency index: " + index);
+        }
+        currencySymbolText = currencySymbols[currentCurrencyIndex].text;
+
+    }
+
+    public void OnCurrencyContineBtnClick()
+    {
+        currenyPannel.SetActive(false);
+        firstPanel.SetActive(true);
+        for (int i = 0; i < firstPannelCurrencySymbolText.Length; i++)
+        {
+            firstPannelCurrencySymbolText[i].text = currencySymbolText;
+        }
+        thirdPannelCurrencySymbol[currentCurrencyIndex].SetActive(true);
     }
 
     public void CheckTotalSelectedItems()
@@ -73,7 +122,7 @@ public class FinanceManager : MonoBehaviour
                 totalSelectedItems++;
                 if (totalSelectedItems == totalMaxSelectedItems)
                 {
-                    Debug.Log("You have exceeded the maximum number of selected items!"+totalPriceText.text );
+                    Debug.Log("You have exceeded the maximum number of selected items!" + totalPriceText.text);
                     shouldSpeakTotal = !secondPanel.activeSelf;
                     secondPanel.SetActive(true);
                     firstPanel.SetActive(false);
@@ -130,24 +179,25 @@ public class FinanceManager : MonoBehaviour
         totalChangeText.text = "0.00";
         lastSliderText.text = 0.ToString("F2");
         lastSlider.value = 0;
-        lastSpeakingText.text = "0.00€";
+        lastSpeakingText.text = "0.00 " + currencySymbolText;
         totalTenderedCents = 0;
 
         if (shouldSpeakTotal)
         {
-            StartCoroutine(SpeakTotalAfterDelay());
+            // StartCoroutine(SpeakTotalAfterDelay());
+            if (secondPanel.activeInHierarchy)
+            {
+                mobileTTS.SpeakTxt("The  total  is " + totalPriceText.text + ",  can  you  pay  the  cashier?");
+            }
         }
     }
 
-    private IEnumerator SpeakTotalAfterDelay()
-    {
-        yield return new WaitForSeconds(0.5f);
+    //private IEnumerator SpeakTotalAfterDelay()
+    //{
+       // yield return new WaitForSeconds(0.2f);
 
-        if (secondPanel.activeInHierarchy)
-        {
-            mobileTTS.SpeakTxt("The  total  is " + totalPriceText.text + ",  can  you  pay  the  cashier?");
-        }
-    }
+
+    //}
 
     private float CalculateTotalPrice()
     {
@@ -168,7 +218,7 @@ public class FinanceManager : MonoBehaviour
 
     public void OnLastSpeakBtn()
     {
-         mobileTTS.SpeakTxt(lastSpeakingText.text);
+        mobileTTS.SpeakTxt(lastSpeakingText.text);
     }
 
     public void OnEuroBtnClick(float value)
@@ -182,7 +232,7 @@ public class FinanceManager : MonoBehaviour
 
         lastSlider.value = paidCents / 100f;
         lastSliderText.text = lastSlider.value.ToString("F2");
-        lastSpeakingText.text = lastSlider.value.ToString("F2") + "€";
+        lastSpeakingText.text = lastSlider.value.ToString("F2");
         totalDepositMoney.text = (totalDepositMoneyValue - lastSlider.value).ToString("F2");
         totalChangeText.text = (changeCents / 100f).ToString("F2");
 
@@ -203,7 +253,7 @@ public class FinanceManager : MonoBehaviour
                 {
                     changePannel.SetActive(true);
                     Debug.Log("You have selected more than the payout amount. Your change is: " + totalChangeText.text);
-                    mobileTTS.SpeakTxt("Well  done!  Your  change  is  " + totalChangeText.text + "  euros.");
+                    mobileTTS.SpeakTxt("Well  done!  Your  change  is  " + totalChangeText.text + "  " + currencySymbolText + ".");
                 }
             }
         }
@@ -211,12 +261,14 @@ public class FinanceManager : MonoBehaviour
         {
             lastSlider.fillRect.GetComponent<Image>().color = Color.orange;
         }
-       
+
     }
 
     private IEnumerator ShowGreatJobPanelAfterDelay()
     {
         yield return new WaitForSeconds(1f);
+
+        mobileTTS.SpeakTxt("You succeeded, try it without the tablet.");
         greatJobPanel.SetActive(true);
         StopCoroutine(ShowGreatJobPanelAfterDelay());
     }

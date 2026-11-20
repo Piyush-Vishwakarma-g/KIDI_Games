@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelUpManager : MonoBehaviour
 {
     private Coroutine disableCoroutine;
+    public MobileTTS mobileTTS;
 
     private void OnEnable()
     {
@@ -23,7 +24,9 @@ public class LevelUpManager : MonoBehaviour
 
     private IEnumerator DisTryAgainRoutine()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        mobileTTS.SpeakTxt("You succeeded, try it without the tablet.");
+        yield return new WaitForSeconds(4f);
         LevelData.instance.targetIndex=0;
         
         GameManager.instance.mainMeneu.SetActive(true);

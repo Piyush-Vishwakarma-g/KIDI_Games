@@ -5,6 +5,7 @@ using System.Collections;
 public class TrainLevelUpManager : MonoBehaviour
 {
     private Coroutine disableCoroutine;
+    public TrainMobileTTs mobileTTS;
 [SerializeField] private float moveDuration = 1.0f; // Movement duration in seconds
     private void OnEnable()
     {
@@ -54,7 +55,9 @@ public class TrainLevelUpManager : MonoBehaviour
 
     private IEnumerator DisTryAgainRoutine()
     {
-        yield return new WaitForSeconds(2f);
+         yield return new WaitForSeconds(1f);
+        mobileTTS.SpeakTxt("You succeeded, try it without the tablet.");
+        yield return new WaitForSeconds(4f);
         TrainLevelData.instance.targetIndex=0;
         
         // Load the scene first (no need to deactivate the GameObject right before changing scenes)

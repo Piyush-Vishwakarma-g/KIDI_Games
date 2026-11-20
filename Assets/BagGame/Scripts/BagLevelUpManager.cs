@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class BagLevelUpManager : MonoBehaviour
 {
     private Coroutine disableCoroutine;
+    public BagMobileTTS mobileTTS;
 
     private void OnEnable()
     {
@@ -23,8 +24,11 @@ public class BagLevelUpManager : MonoBehaviour
 
     private IEnumerator DisTryAgainRoutine()
     {
+        yield return new WaitForSeconds(1f);
+        mobileTTS.SpeakTxt("Bravo! You succeeded, try it without the tablet.");
+        
         // Using Realtime ensures the timer runs even if the game is paused (Time.timeScale = 0)
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(4f);
         
         if (BagLevelData.instance != null)
         {
