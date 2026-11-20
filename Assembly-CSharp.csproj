@@ -74,8 +74,8 @@
     <Compile Include="Assets\BlueTrain\TrainLevelUpManager.cs" />
     <Compile Include="Assets\3D Laboratory Environment with Appratus\Prefabs\GranularController.cs" />
     <Compile Include="Assets\BlueTrain\TrainLevelData.cs" />
-    <Compile Include="Assets\Scripts\TraversePathUnity6\PathVisual.cs" />
     <Compile Include="Assets\FinanceLevelUpManager.cs" />
+    <Compile Include="Assets\Scripts\TraversePathUnity6\PathVisual.cs" />
     <Compile Include="Assets\Scripts\ShapeTracer.cs" />
     <Compile Include="Assets\Scripts\UnityMessageManager.cs" />
     <Compile Include="Assets\Scripts\DraggableContainer.cs" />
