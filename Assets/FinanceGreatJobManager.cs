@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class FinanceGreatJobManager : MonoBehaviour
 {
    private Coroutine disableCoroutine;
-
+ public GameObject levelUpPanel;
     private void OnEnable()
     {
         if (disableCoroutine != null)
@@ -19,9 +19,9 @@ public class FinanceGreatJobManager : MonoBehaviour
 
     private IEnumerator DisTryAgainRoutine()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
-        SceneManager.LoadScene("finance");
+        levelUpPanel.SetActive(true);
     }
 
     private void OnDisable()

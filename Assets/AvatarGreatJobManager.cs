@@ -8,6 +8,8 @@ public class AvatarGreatJobManager : MonoBehaviour
  private Coroutine disableCoroutine;
  public MobileTTS mobileTTS;
 
+ public GameObject levelUpPanel;
+
     private void OnEnable()
     {
         if (disableCoroutine != null)
@@ -17,13 +19,15 @@ public class AvatarGreatJobManager : MonoBehaviour
         disableCoroutine = StartCoroutine(DisTryAgainRoutine());
         
                 
-        mobileTTS.SpeakTxt("Bravo! Well done! You succeeded, try it without the tablet.");
+       
     }
 
     private IEnumerator DisTryAgainRoutine()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
+         mobileTTS.SpeakTxt("Bravo! Well done! You succeeded, try it without the tablet.");
         gameObject.SetActive(false);
+        levelUpPanel.SetActive(true);
     }
 
     private void OnDisable()

@@ -31,7 +31,7 @@ public class LevelUpManager : MonoBehaviour
         
         GameManager.instance.mainMeneu.SetActive(true);
         // Load the scene first (no need to deactivate the GameObject right before changing scenes)
-        SceneManager.LoadScene("CubeGame");
+       // SceneManager.LoadScene("CubeGame");
     }
 
     private void OnDisable()

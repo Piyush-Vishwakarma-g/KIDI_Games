@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class RobotGreatJobManager : MonoBehaviour
 {
     private Coroutine disableCoroutine;
+    public GameObject levelUpPanel;
+    public MobileTTS mobileTTS;
 
     private void OnEnable()
     {
@@ -20,8 +22,10 @@ public class RobotGreatJobManager : MonoBehaviour
     private IEnumerator DisTryAgainRoutine()
     {
         yield return new WaitForSeconds(2f);
+        mobileTTS.SpeakTxt("Bravo! Well done You succeeded, try it without the tablet.");
         gameObject.SetActive(false);
-        SceneManager.LoadScene("Robot");
+        levelUpPanel.SetActive(true);
+       // SceneManager.LoadScene("Robot");
     }
 
     private void OnDisable()

@@ -56,12 +56,12 @@ public class TrainLevelUpManager : MonoBehaviour
     private IEnumerator DisTryAgainRoutine()
     {
          yield return new WaitForSeconds(1f);
-        mobileTTS.SpeakTxt("You succeeded, try it without the tablet.");
-        yield return new WaitForSeconds(4f);
+        mobileTTS.SpeakTxt("Bravo! Well done You succeeded, try it without the tablet.");
+        //yield return new WaitForSeconds(4f);
         TrainLevelData.instance.targetIndex=0;
         
         // Load the scene first (no need to deactivate the GameObject right before changing scenes)
-        SceneManager.LoadScene("TrainGame");
+        //SceneManager.LoadScene("TrainGame");
     }
 
     private void OnDisable()
