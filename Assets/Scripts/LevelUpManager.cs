@@ -28,10 +28,32 @@ public class LevelUpManager : MonoBehaviour
         mobileTTS.SpeakTxt("You succeeded, try it without the tablet.");
         yield return new WaitForSeconds(4f);
         LevelData.instance.targetIndex=0;
-        this.gameObject.SetActive(false);
-        GameManager.instance.mainMeneu.SetActive(true);
+        //this.gameObject.SetActive(false);
+        //GameManager.instance.mainMeneu.SetActive(true);
+        //ResetGameData();
         // Load the scene first (no need to deactivate the GameObject right before changing scenes)
-        SceneManager.LoadScene("CubeGame");
+        //SceneManager.LoadScene("CubeGame");
+    }
+    private void ResetGameData()
+    {
+        LevelData.instance.levelIndex = 0;
+        LevelData.instance.targetIndex = 0;
+        GameManager.instance.SetTargetName();
+        for(int i = 0; i < GameManager.instance.levelCubeObj.Length; i++)
+        {
+            for(int j = 2; j < GameManager.instance.levelCubeObj[i].transform.childCount; j++)
+            {
+                GameManager.instance.levelCubeObj[i].transform.GetChild(j).GetChild(0).gameObject.SetActive(false);
+        
+            }
+        }
+        for(int i = 0; i < GameManager.instance.levelOneUI.transform.childCount; i++)
+        {
+            GameManager.instance.levelOneUI.transform.GetChild(i).gameObject.SetActive(true);
+        }
+        
+        //GameManager.instance.levelCubeObj[LevelData.instance.levelIndex].transform.position=new Vector3(0,0,0);
+        GameManager.instance.levelCubeObj[LevelData.instance.levelIndex].transform.rotation=Quaternion.Euler(0,0,0);
     }
 
     private void OnDisable()
